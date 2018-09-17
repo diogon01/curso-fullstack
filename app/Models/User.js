@@ -4,12 +4,15 @@
 const Model = use('Model')
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
-const Hash = use('Hash')
+const Hash = use('Hash');
 
 class User extends Model {
-  static boot () {
-    super.boot()
+  static get hidden() {
+    return ['password'];
+  }
 
+  static boot() {
+    super.boot();
     /**
      * A hook to hash the user password before saving
      * it to the database.
