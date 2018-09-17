@@ -30,6 +30,8 @@ class UserController {
    * GET users/:id
    */
   async show({params, request, response, view}) {
+    const user = await User.findBy('id', params.id);
+    return user;
   }
 
   /**
