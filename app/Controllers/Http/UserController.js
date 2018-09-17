@@ -35,17 +35,15 @@ class UserController {
   }
 
   /**
-   * Render a form to update an existing user.
-   * GET users/:id/edit
-   */
-  async edit({params, request, response, view}) {
-  }
-
-  /**
    * Update user details.
    * PUT or PATCH users/:id
    */
   async update({params, request, response}) {
+    const user = await User.findBy('id', params.id);
+    const all = request.all();
+    user.merge(all);
+    await user.save();
+    return user;
   }
 
   /**
