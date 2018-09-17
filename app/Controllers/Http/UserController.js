@@ -1,6 +1,7 @@
 'use strict';
 
 const User = use('App/Models/User');
+const Database = use('Database');
 
 /**
  * Resourceful controller for interacting with users
@@ -20,9 +21,19 @@ class UserController {
    * POST users
    */
   async store({request, response}) {
+    const trx = await Database.beginTransaction();
     const all = request.all();
-    const user = await User.create(all);
-    return user;
+
+    try {
+      const user = await User.create(all,trx);
+    trx.commit();
+    return response.status(201).send(user);
+  }
+    catch (e) {
+      trx.rollback();
+      return response.status(500).send(e);
+    }
+
   }
 
   /**
