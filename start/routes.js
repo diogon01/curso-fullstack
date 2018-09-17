@@ -17,7 +17,28 @@
 const Route = use('Route');
 
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
+  return {greeting: 'Hello world in JSON'}
 });
 
-Route.post('login', 'UserController.login');
+Route.get('curso', () => {
+  return 'Isso vai ser um retorno do estilo texto'
+});
+
+Route.get('video/:id', async ({params}) => {
+  return 'Essa é nossa video aula de: ' + params.id;
+});
+
+Route.get('faz/:bebida?', async ({params}) => {
+  // use Coffee as fallback when drink is not defined
+  const drink = params.bebida || 'Café'
+
+  return `Voce faz ${drink} para beber!`
+})
+
+
+Route.resource('usuarios', 'UserController')
+  .apiOnly()
+  .middleware(['auth']);
+
+
+Route.post('login', 'AuthController.login');
