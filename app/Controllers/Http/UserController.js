@@ -16,17 +16,13 @@ class UserController {
   }
 
   /**
-   * Render a form to be used for creating a new user.
-   * GET users/create
-   */
-  async create({request, response, view}) {
-  }
-
-  /**
    * Create/save a new user.
    * POST users
    */
   async store({request, response}) {
+    const all = request.all();
+    const user = await User.create(all);
+    return user;
   }
 
   /**
