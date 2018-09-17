@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,25 +20,8 @@ Route.get('/', () => {
   return {greeting: 'Hello world in JSON'}
 });
 
-Route.get('curso', () => {
-  return 'Isso vai ser um retorno do estilo texto'
-});
-
-Route.get('video/:id', async ({params}) => {
-  return 'Essa é nossa video aula de: ' + params.id;
-});
-
-Route.get('faz/:bebida?', async ({params}) => {
-  // use Coffee as fallback when drink is not defined
-  const drink = params.bebida || 'Café'
-
-  return `Voce faz ${drink} para beber!`
-})
-
-
 Route.resource('usuarios', 'UserController')
-  .apiOnly()
-  .middleware(['auth']);
+  .apiOnly();
 
 
 Route.post('login', 'AuthController.login');
