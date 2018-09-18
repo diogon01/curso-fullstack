@@ -21,7 +21,11 @@ Route.get('/', () => {
 });
 
 Route.resource('usuarios', 'UserController')
-  .apiOnly();
+  .apiOnly()
+  .validator(new Map([
+    [['usuarios.store'], ['StoreUser']],
+    [['usuarios.update'], ['UpdateUser']]
+  ]));
 
 
 Route.post('login', 'AuthController.login');
